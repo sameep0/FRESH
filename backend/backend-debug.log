@@ -1,0 +1,114 @@
+[dotenv@17.2.0] injecting env (6) from .env (tip: ⚙️  enable debug logging with { debug: true })
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Users' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `Users`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Users' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `Users` CHANGE `username` `username` VARCHAR(255) NOT NULL UNIQUE;
+Executing (default): ALTER TABLE `Users` CHANGE `password` `password` VARCHAR(255) NOT NULL;
+Executing (default): ALTER TABLE `Users` CHANGE `email` `email` VARCHAR(255) NOT NULL UNIQUE;
+Executing (default): ALTER TABLE `Users` CHANGE `name` `name` VARCHAR(255);
+Executing (default): ALTER TABLE `Users` CHANGE `role` `role` ENUM('user', 'admin') DEFAULT 'user';
+Executing (default): ALTER TABLE `Users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Users` CHANGE `phone` `phone` VARCHAR(255);
+Executing (default): ALTER TABLE `Users` CHANGE `location` `location` VARCHAR(255);
+Executing (default): ALTER TABLE `Users` CHANGE `bio` `bio` TEXT;
+Executing (default): ALTER TABLE `Users` CHANGE `avatar` `avatar` VARCHAR(255);
+Executing (default): SHOW INDEX FROM `Users`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Accounts' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `Accounts`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Accounts' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `Accounts` CHANGE `name` `name` VARCHAR(255) NOT NULL;
+Executing (default): ALTER TABLE `Accounts` CHANGE `type` `type` VARCHAR(255) NOT NULL;
+Executing (default): ALTER TABLE `Accounts` CHANGE `balance` `balance` DECIMAL(12,2) DEFAULT 0;
+Executing (default): ALTER TABLE `Accounts` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Accounts` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Accounts' AND constraint_name = 'Accounts_ibfk_1' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Accounts` DROP FOREIGN KEY `Accounts_ibfk_1`;
+Executing (default): ALTER TABLE `Accounts` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `Accounts` CHANGE `currency` `currency` VARCHAR(255) DEFAULT 'USD';
+Executing (default): ALTER TABLE `Accounts` CHANGE `description` `description` TEXT;
+Executing (default): SHOW INDEX FROM `Accounts`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Categories' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `Categories`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Categories' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `Categories` CHANGE `name` `name` VARCHAR(255) NOT NULL;
+Executing (default): ALTER TABLE `Categories` CHANGE `type` `type` ENUM('income', 'expense') NOT NULL;
+Executing (default): ALTER TABLE `Categories` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Categories` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Categories' AND constraint_name = 'Categories_ibfk_1' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Categories` DROP FOREIGN KEY `Categories_ibfk_1`;
+Executing (default): ALTER TABLE `Categories` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `Categories` CHANGE `color` `color` VARCHAR(255) DEFAULT '#1976d2';
+Executing (default): ALTER TABLE `Categories` CHANGE `description` `description` TEXT;
+Executing (default): SHOW INDEX FROM `Categories`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Transactions' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `Transactions`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Transactions' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `Transactions` CHANGE `amount` `amount` DECIMAL(12,2) NOT NULL;
+Executing (default): ALTER TABLE `Transactions` CHANGE `date` `date` DATE NOT NULL;
+Executing (default): ALTER TABLE `Transactions` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `Transactions` CHANGE `type` `type` ENUM('income', 'expense') NOT NULL;
+Executing (default): ALTER TABLE `Transactions` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Transactions` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Transactions' AND constraint_name = 'Transactions_ibfk_85' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Transactions` DROP FOREIGN KEY `Transactions_ibfk_85`;
+Executing (default): ALTER TABLE `Transactions` ADD FOREIGN KEY (`AccountId`) REFERENCES `Accounts` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Transactions' AND constraint_name = 'Transactions_ibfk_86' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Transactions` DROP FOREIGN KEY `Transactions_ibfk_86`;
+Executing (default): ALTER TABLE `Transactions` ADD FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Transactions' AND constraint_name = 'Transactions_ibfk_87' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Transactions` DROP FOREIGN KEY `Transactions_ibfk_87`;
+Executing (default): ALTER TABLE `Transactions` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `Transactions` CHANGE `notes` `notes` TEXT;
+Executing (default): SHOW INDEX FROM `Transactions`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Budgets' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `Budgets`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Budgets' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `Budgets` CHANGE `amount` `amount` DECIMAL(12,2) NOT NULL;
+Executing (default): ALTER TABLE `Budgets` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `Budgets` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Budgets' AND constraint_name = 'Budgets_ibfk_57' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Budgets` DROP FOREIGN KEY `Budgets_ibfk_57`;
+Executing (default): ALTER TABLE `Budgets` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Budgets' AND constraint_name = 'Budgets_ibfk_58' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `Budgets` DROP FOREIGN KEY `Budgets_ibfk_58`;
+Executing (default): ALTER TABLE `Budgets` ADD FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `Budgets` CHANGE `period` `period` ENUM('monthly', 'quarterly', 'yearly') DEFAULT 'monthly';
+Executing (default): ALTER TABLE `Budgets` CHANGE `startDate` `startDate` DATE NOT NULL;
+Executing (default): ALTER TABLE `Budgets` CHANGE `description` `description` TEXT;
+Executing (default): SHOW INDEX FROM `Budgets`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'RecurringTransactions' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `RecurringTransactions`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'RecurringTransactions' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `amount` `amount` DECIMAL(12,2) NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `type` `type` ENUM('income', 'expense') NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `interval` `interval` ENUM('daily', 'weekly', 'monthly', 'yearly') NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `nextDate` `nextDate` DATE NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `endDate` `endDate` DATE;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `isActive` `isActive` TINYINT(1) DEFAULT true;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `RecurringTransactions` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='RecurringTransactions' AND constraint_name = 'RecurringTransactions_ibfk_85' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `RecurringTransactions` DROP FOREIGN KEY `RecurringTransactions_ibfk_85`;
+Executing (default): ALTER TABLE `RecurringTransactions` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='RecurringTransactions' AND constraint_name = 'RecurringTransactions_ibfk_86' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `RecurringTransactions` DROP FOREIGN KEY `RecurringTransactions_ibfk_86`;
+Executing (default): ALTER TABLE `RecurringTransactions` ADD FOREIGN KEY (`AccountId`) REFERENCES `Accounts` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='RecurringTransactions' AND constraint_name = 'RecurringTransactions_ibfk_87' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `RecurringTransactions` DROP FOREIGN KEY `RecurringTransactions_ibfk_87`;
+Executing (default): ALTER TABLE `RecurringTransactions` ADD FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `RecurringTransactions`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'UserSettings' AND TABLE_SCHEMA = 'personalft_db'
+Executing (default): SHOW FULL COLUMNS FROM `UserSettings`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'UserSettings' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='personalft_db' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `UserSettings` CHANGE `theme` `theme` ENUM('light', 'dark') DEFAULT 'light';
+Executing (default): ALTER TABLE `UserSettings` CHANGE `notifications` `notifications` TINYINT(1) DEFAULT true;
+Executing (default): ALTER TABLE `UserSettings` CHANGE `cloudSync` `cloudSync` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `UserSettings` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `UserSettings` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='UserSettings' AND constraint_name = 'UserSettings_ibfk_1' AND TABLE_SCHEMA = 'personalft_db';
+Executing (default): ALTER TABLE `UserSettings` DROP FOREIGN KEY `UserSettings_ibfk_1`;
+Executing (default): ALTER TABLE `UserSettings` ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `UserSettings`
+Server running on port 3001

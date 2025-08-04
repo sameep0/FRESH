@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 480px;
+  height: 540px;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 32px;
+  background: radial-gradient(circle at 60% 40%, rgba(120, 80, 255, 0.18) 0%, rgba(80, 200, 255, 0.10) 60%, rgba(40, 40, 60, 0.01) 100%);
+  filter: blur(32px);
+  opacity: 0.95;
+  animation: glow-fade 6s ease-in-out infinite alternate;
+}
+
+@keyframes glow-fade {
+  0% { opacity: 0.92; filter: blur(28px); }
+  100% { opacity: 1; filter: blur(36px); }
+}
+
+.glassy-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(30, 28, 40, 0.82);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(80,80,120,0.18), 0 16px 64px 0 rgba(80,80,120,0.12);
+  border: 1.5px solid rgba(160, 120, 255, 0.18);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
